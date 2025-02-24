@@ -4,18 +4,8 @@ import * as React from 'react'
 import { AlertCircle } from 'lucide-react'
 import * as SliderPrimitive from '@radix-ui/react-slider'
 
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from '@/components/ui/dialog'
-
 const COST_PER_VOTE = 8
 const respondentOptions = [20, 50, 100, 200, 500, 1000]
 
@@ -88,47 +78,11 @@ export function RespondentCount({
                         </div>
                     </div>
 
-                    {insufficientFunds && (
-                        <Alert variant="destructive">
-                            <AlertCircle className="h-4 w-4" />
-                            <AlertTitle>Недостаточно средств</AlertTitle>
-                            <AlertDescription>
-                                Ваш текущий баланс ({userBalance} ₽)
-                                недостаточен для создания этого опроса.
-                                Пожалуйста, пополните баланс для продолжения.
-                            </AlertDescription>
-                        </Alert>
-                    )}
-
                     <div className="flex justify-end">
                         <Button onClick={handleConfirm}>Продолжить</Button>
                     </div>
                 </CardContent>
             </Card>
-
-            <Dialog open={showDialog} onOpenChange={setShowDialog}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Недостаточно средств</DialogTitle>
-                        <DialogDescription>
-                            Ваш текущий баланс {userBalance} ₽. Необходимо{' '}
-                            {totalCost} ₽ для создания опроса. Хотите пополнить
-                            баланс?
-                        </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter>
-                        <Button
-                            variant="outline"
-                            onClick={() => setShowDialog(false)}
-                        >
-                            Отмена
-                        </Button>
-                        <Button asChild>
-                            <a href="/billing">Пополнить баланс</a>
-                        </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
         </>
     )
 }
